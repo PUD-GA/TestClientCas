@@ -88,6 +88,8 @@ WSGI_APPLICATION = 'mon_site_use_proxy.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+
+
 URLDB = ('postgresql://' + config("PGUSER") + ':' + config("PGPASSWORD") + '@' +
          config("PGHOST") + ':' + config("PGPORT") + '/' + config("PGDATABASE") +
          '?sslmode=require')
