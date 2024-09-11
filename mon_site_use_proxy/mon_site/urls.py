@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home, login
+from .views import home
 import django_cas_ng.views
 
 urlpatterns = [

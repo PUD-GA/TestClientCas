@@ -23,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("MY_KEY")
+SECRET_KEY = 'django-insecure-!h-(vt%tfxfjc9r2-g%3tht%6&m^e=fn^wg=^#ufhqtest'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'django_cas_ng'
 ]
 
-CAS_SERVER_URL = 'https://mamacas1.onrender.com/cas/'
-CAS_PROXY_CALLBACK = 'https://testproxycas.onrender.com/cas/callback'
+CAS_SERVER_URL = 'http://127.0.0.1:8001/cas/'
+CAS_PROXY_CALLBACK = 'http://127.0.0.1:8002/cas/callback'
 CAS_VERSION = '3'
 
 MIDDLEWARE = [
@@ -90,17 +90,12 @@ WSGI_APPLICATION = 'mon_site_use_proxy.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 
-URLDB = ('postgresql://' + config("PGUSER") + ':' + config("PGPASSWORD") + '@' +
-         config("PGHOST") + ':' + config("PGPORT") + '/' + config("PGDATABASE") +
-         '?sslmode=require')
-
 DATABASES = {
-    'default': dj_database_url.config(
-        default=URLDB,
-        # Create persistent database connections by default. Remove connections
-        # that have been idle for 30 seconds or longer. Set this to 0 if you'd
-        # like to use a new connection for each database query.
-        conn_max_age=30)}
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
@@ -138,12 +133,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-
-if not DEBUG:    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
-    # and renames the files with unique names for each version to support long-term caching
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
