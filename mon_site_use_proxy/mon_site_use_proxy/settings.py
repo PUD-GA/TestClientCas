@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django_cas_ng'
 ]
 
-CAS_SERVER_URL = 'https://mamacas1.onrender.com/cas/login'
+CAS_SERVER_URL = 'https://mamacas1.onrender.com/cas'
 CAS_PROXY_CALLBACK = 'https://testproxycas.onrender.com/cas/callback'
 CAS_VERSION = '3'
 
